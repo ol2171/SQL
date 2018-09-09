@@ -47,3 +47,48 @@ from Logs l1, Logs l2, Logs l3
 where l1.ID=l2.ID-1
 and l2.ID=l3.ID-1
 and l1.Num=l2.Num=l3.Num
+
+603. 2 Consecutive Available Seats
+
+select distinct c1.seat_id
+from cinema c1
+join cinema c2
+where abs(c1.seat_id - c2.seat_id)=1
+and c1.free=1 and c2.free=1
+order by c1.seat_id
+
+196.Delete duplicates
+
+DELETE p1 FROM Person p1,
+    Person p2
+WHERE
+    p1.Email = p2.Email AND p1.Id > p2.Id
+    
+ 
+ 178.rank scores
+ 
+ https://leetcode.com/problems/rank-scores/discuss/53094/Simple-Short-Fast
+ 
+ Difference between ranks:https://docs.microsoft.com/en-us/sql/t-sql/functions/ranking-functions-transact-sql?view=sql-server-2017
+ 
+ select score,dense_rank() over (order by score desc) as rank
+ 
+ 597. Friend Requests I: Overall Acceptance Rate
+ 
+ select round(
+        ifnull(
+                (select count(distinct requester_id,accepter_id) from request_accepted as accept)/
+                (Select count(distinct sender_id,send_to_id) from friend_request as request),0)
+        ,2) as accept_rate
+                       
+select round(ifnull(count(distinct requester_id,accepter_id)/count(distinct sender_id,send_to_id),0),2) as accept_rate
+from request_accepted,friend_request
+from Scores
+
+ select s2.score
+     Score, (select count(distinct score) from Scores s1 where s1.Score>=s2.Score) Rank
+from scores s2
+order by Score desc
+
+Follow-ups?
+
