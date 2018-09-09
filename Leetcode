@@ -30,3 +30,20 @@ from
 where a.rank1 = 2
 
 177. Nth Highest
+https://javarevisited.blogspot.com/2016/01/4-ways-to-find-nth-highest-salary-in.html
+
+180.Consecutive 3 Numbers
+
+Accepted:
+
+select distinct num as ConsecutiveNums
+from
+(select num,lead(num,1) over (order by id) as lead1,lead(num,2) over (order by id) as lead2
+from Logs) as a
+where a.num=a.lead1 and a.lead1=a.lead2
+
+select l1.Num as ConsecutiveNums
+from Logs l1, Logs l2, Logs l3
+where l1.ID=l2.ID-1
+and l2.ID=l3.ID-1
+and l1.Num=l2.Num=l3.Num
